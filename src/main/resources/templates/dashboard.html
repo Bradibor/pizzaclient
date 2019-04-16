@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Taco Cloud</title>
+</head>
+<body>
+<h1>Hey, <span th:text="${user.login}" th:remove="tag"/>, <span th:text="${greeting}" th:remove="tag"/></h1>
+<h2>Create your own pizza!</h2>
+<form method="post" th:action="@{/makePizza}">
+    <div th:each="topping : ${toppings}" th:field="${pizza.toppings}">
+        <input name="topping" type="checkbox" th:value="${topping.name}"/><span th:text="${topping.name}"></span>
+    </div>
+    <input name="pizza name" type="text" th:field="${pizza.name}">
+    <input name="pizza name" type="text" th:field="${pizza.dough}">
+    <input name="pizza size" type="text" th:field="${pizza.size}">
+    <button>Submit your pizza</button>
+</form>
+</body>
