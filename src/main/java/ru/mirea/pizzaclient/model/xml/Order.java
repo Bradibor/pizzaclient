@@ -8,12 +8,12 @@
 
 package ru.mirea.pizzaclient.model.xml;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -43,6 +43,8 @@ import javax.xml.bind.annotation.XmlType;
     "address",
     "pizza"
 })
+@Data
+@EqualsAndHashCode
 public class Order {
 
     @XmlElement(required = true)
@@ -50,7 +52,7 @@ public class Order {
     @XmlElement(required = true)
     protected String address;
     @XmlElement(required = true)
-    protected List<Pizza> pizza;
+    protected List<Pizza> pizza = new ArrayList<>();
 
     /**
      * Gets the value of the user property.

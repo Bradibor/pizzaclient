@@ -11,6 +11,7 @@ package ru.mirea.pizzaclient.model.xml;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -45,7 +46,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Toppings {
 
     @XmlElement(required = true)
-    protected List<Topping> topping;
+    protected List<Topping> topping = new ArrayList<>();
 
     /**
      * Gets the value of the topping property.

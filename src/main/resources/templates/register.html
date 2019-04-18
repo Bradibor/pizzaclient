@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Taco Cloud</title>
+    <title>Mirea Pizza</title>
 </head>
 <body>
-    <h1>Enter your login to Register</h1>
+    <h1>Введите имя пользователя, чтобы войти или зарегистрироваться:</h1>
     <form th:action="@{/register}" th:object="${user}" method="post">
         <input name="login" type="text" th:field="*{login}">
+        <button>Далее</button>
     </form>
 </body>

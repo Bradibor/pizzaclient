@@ -2,18 +2,58 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Taco Cloud</title>
+    <title>Mirea Pizza</title>
 </head>
 <body>
-<h1>Hey, <span th:text="${user.login}" th:remove="tag"/>, <span th:text="${greeting}" th:remove="tag"/></h1>
-<h2>Create your own pizza!</h2>
+<h1>Привет, <span th:text="${user.login}" th:remove="tag"/>, <span th:text="${greeting}" th:remove="tag"/></h1>
+<h2>Создай пиццу:</h2>
 <form method="post" th:action="@{/makePizza}">
     <div th:each="topping : ${toppings}" th:field="${pizza.toppings}">
         <input name="topping" type="checkbox" th:value="${topping.name}"/><span th:text="${topping.name}"></span>
     </div>
-    <input name="pizza name" type="text" th:field="${pizza.name}">
-    <input name="pizza name" type="text" th:field="${pizza.dough}">
-    <input name="pizza size" type="text" th:field="${pizza.size}">
-    <button>Submit your pizza</button>
+    <span>Название:</span><input name="pizza name" type="text" th:field="${pizza.name}">
+    <span>Толщина теста:</span>
+    <select name="dough" th:field="${pizza.dough}">
+        <option value="Толстое">Толстое</option>
+        <option value="Тонкое">Тонкое</option>
+    </select>
+    <span>Размер:</span>
+    <select name="size" th:field="${pizza.size}">
+        <option value="22">22</option>
+        <option value="28">28</option>
+        <option value="35">35</option>
+    </select>
+    <button>Сохранить пиццу</button>
 </form>
+<h2>Сохраненные пиццы:</h2>
+<div th:each="pizza : ${savedPizzas}">
+    '<span th:text="${pizza.name}"></span>'
+    <span th:text="${pizza.size}"></span>см
+    <span th:text="${pizza.dough}"></span> тесто
+    <span th:each="topping : ${pizza.toppings.topping}">
+        <i><span th:text="${topping.name}"></span></i>
+    </span>
+    <hr>
+</div>
+<h2>Сделать заказ:</h2>
+<form method="post" th:action="@{/makeOrder}" th:object="${order}">
+    <div th:each="pizza : ${order.pizza}">
+        '<span th:text="${pizza.name}"></span>'
+    </div>
+    <select th:object="${pizzaChooser}" th:field="*{pizzaName}">
+        <option name="pizza" th:each="pizza : ${savedPizzas}" th:value="${pizza.name}" th:text="${pizza.name}"></option>
+    </select>
+    <input type="number" th:object="${pizzaChooser}" th:field="*{count}" th:value="1">
+    <button name="action" value="update">Добавить</button>
+    <span>Адрес:</span><input name="pizza name" type="text" th:field="${order.address}">
+    <button name="action" value="submit">Сделать заказ</button>
+</form>
+<h2>Заказы:</h2>
+<div th:each="order : ${orders}">
+    <span th:text="${order.address}"></span>
+    <span th:each="pizza : ${order.pizza}">
+        <span th:text="${pizza.name}"></span>
+    </span>
+    <hr>
+</div>
 </body>

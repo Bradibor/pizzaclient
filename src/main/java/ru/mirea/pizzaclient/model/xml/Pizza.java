@@ -8,10 +8,11 @@
 
 package ru.mirea.pizzaclient.model.xml;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import javax.xml.bind.annotation.*;
+import java.beans.Transient;
 
 
 /**
@@ -43,15 +44,16 @@ import javax.xml.bind.annotation.XmlType;
     "dough",
     "toppings"
 })
+@Data
+@EqualsAndHashCode
 public class Pizza {
-
     @XmlElement(required = true)
     protected String name;
     protected int size;
     @XmlElement(required = true)
     protected String dough;
     @XmlElement(required = true)
-    protected Toppings toppings;
+    protected Toppings toppings = new Toppings();
 
     /**
      * Gets the value of the name property.
